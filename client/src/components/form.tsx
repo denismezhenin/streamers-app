@@ -15,8 +15,14 @@ const AddStreamerForm = () => {
     },
   });
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    const res = await fetch("http://localhost:3000/streamers", {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(values)
+    })
     form.reset();
     // form.getInputProps
   };
