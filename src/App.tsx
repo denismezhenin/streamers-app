@@ -4,7 +4,10 @@ import { Router } from './utils/router';
 
 function App() {
   return (
-    <MantineProvider>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+    >
       <BrowserRouter>
         <Router />
       </BrowserRouter>
