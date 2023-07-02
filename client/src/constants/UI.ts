@@ -16,6 +16,7 @@ const UI = {
     nameError: 'Please provide a name of a streamer',
     platformError: 'Please choose a platform',
     descriptionError: 'Please provide description of streamer',
+    buttonSubmitText: 'Add Streamer',
   },
   errorBoundary: {
     message: 'Something went wrong',

@@ -1,9 +1,9 @@
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
-import { Button, Group, TextInput, Box, Select, Textarea } from '@mantine/core';
+import { Button, TextInput, Box, Select, Textarea } from '@mantine/core';
 import { useState } from 'react';
-import { createStreamer } from '../utils/api';
-import { createStreamerFormValues } from '../constants/types';
-import { UI } from '../constants/UI';
+import { createStreamer } from '../../../utils/api';
+import { createStreamerFormValues } from '../../../constants/types';
+import { UI } from '../../../constants/UI';
 
 const AddStreamerForm = ({
   setStreamers,
@@ -33,7 +33,6 @@ const AddStreamerForm = ({
       form.reset();
     }
     setDisabled(false);
-    // form.getInputProps
   };
 
   return (
@@ -73,11 +72,9 @@ const AddStreamerForm = ({
         maxLength={300}
         {...form.getInputProps('description')}
       />
-      {/* <Group  mt="md"> */}
       <Button type="submit" fullWidth mt="md" disabled={disabled}>
-        Submit
+        {UI.createStreamerForm.buttonSubmitText}
       </Button>
-      {/* </Group> */}
     </Box>
   );
 };

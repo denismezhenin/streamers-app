@@ -1,13 +1,4 @@
-import {
-  createStyles,
-  Header as Head,
-  Container,
-  rem,
-  px,
-  em,
-  ActionIcon,
-  Image,
-} from '@mantine/core';
+import { createStyles, Header as Head, Container, ActionIcon, Image } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 const useStyles = createStyles(() => ({

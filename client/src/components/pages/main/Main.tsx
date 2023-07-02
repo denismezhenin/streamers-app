@@ -1,5 +1,5 @@
-import { AddStreamerForm } from '../../createStreamerForm';
-import { StreamersList } from '../../StreamersList';
+import { AddStreamerForm } from './createStreamerForm';
+import { StreamersList } from '../../Streamers-views/StreamersList';
 import { useFetch } from '../../../hooks/useFetch';
 import { AppLoader } from '../../loader';
 import { streamersAPI } from '../../../constants/constants';

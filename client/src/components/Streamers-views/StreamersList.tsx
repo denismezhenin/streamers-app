@@ -1,7 +1,7 @@
 import { Table, ScrollArea, createStyles } from '@mantine/core';
-import { StreamerRow } from './streamer';
-import { arrStreamerProps } from '../constants/types';
-import { UI } from '../constants/UI';
+import { StreamerRow } from './streamerCard';
+import { arrStreamerProps } from '../../constants/types';
+import { UI } from '../../constants/UI';
 
 const useStyles = createStyles((theme) => ({
   platform: {

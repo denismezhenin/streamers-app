@@ -1,8 +1,8 @@
 import { Avatar, Group, Text, createStyles, ActionIcon } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { ThumbUp, ThumbDown } from 'tabler-icons-react';
-import { useStreamerState } from '../hooks/useStreamerState';
-import { streamerProps } from '../constants/types';
+import { useStreamerState } from '../../hooks/useStreamerState';
+import { streamerProps } from '../../constants/types';
 
 const useStyles = createStyles((theme) => ({
   bodyText: {
@@ -22,7 +22,7 @@ const StreamerRow = ({ _id, platform, name, upVotes, downVotes }: streamerProps)
       downVotes,
     });
 
-  const { classes, cx, theme } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <tr key={_id}>
       <td>
