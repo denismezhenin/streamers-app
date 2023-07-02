@@ -1,7 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from '../components/layout';
 import { MainPage } from '../components/pages/main/Main';
-import { StreamerPage } from '../components/pages/streamer/Streamer';
+import { StreamerPage } from '../components/pages/streamer/StreamerPage';
+import { lazy } from 'react';
+
 
 const Router = () => {
   return (

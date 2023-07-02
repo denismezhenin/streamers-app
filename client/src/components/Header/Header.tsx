@@ -1,4 +1,6 @@
-import { createStyles, Header as Head, Container, rem, px, em } from '@mantine/core';
+import { createStyles, Header as Head, Container, rem, px, em, ActionIcon, Image } from '@mantine/core';
+import { Link } from 'react-router-dom';
+
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -12,8 +14,12 @@ const useStyles = createStyles((theme) => ({
 const Header = () => {
   const { classes } = useStyles();
   return (
-    <Head height={{ base: 40, sm: 60 }} mb={{ base: 16, sm: 32 }}>
-      <Container className={classes.header}>{/* <MantineLogo size={28} /> */}</Container>
+    <Head mb={{ base: 8, sm: 16 }} p={{ base: 5, sm: 10 }}>
+      <Container className={classes.header}>
+      <ActionIcon component={Link} to="/" className={classes.logo} size={50}>
+          <Image src="./icon.svg" alt="Streamers app logo" />
+        </ActionIcon>
+        </Container>
     </Head>
   );
 };

@@ -13,10 +13,11 @@ import {
   rem,
   Anchor,
   Container,
-  Box
+  Box,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import img from '/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png';
+import { useFetch } from '../../../hooks/useFetch';
+import { useStreamerState } from '../../../hooks/useStreamerState';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -33,6 +34,7 @@ const useStyles = createStyles((theme) => ({
 
   content: {
     maxWidth: rem(480),
+    width: '100%',
     // marginRight: `calc(${theme.spacing.xl} * 3)`,
 
     [theme.fn.smallerThan('sm')]: {
@@ -89,78 +91,73 @@ const useStyles = createStyles((theme) => ({
   // },
 }));
 
-interface ArticleCardProps {
-  image: string;
-  id: string;
+export interface ArticleCardProps {
+  _id: string;
   name: string;
   description: string;
   platform: string;
-  likes: number;
-  dislikes: number;
+  upVotes: number;
+  downVotes: number;
 }
 
-const StreamerPage = () => {
-  const { id } = useParams();
+const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: ArticleCardProps) => {
+  // const { id } = useParams();
+  const { isUpVoted, isDownVoted, handleUpVoted, handleDownVoted, votes, disabled } =
+    useStreamerState({
+      upVotes,
+      downVotes,
+    });
   const { classes, cx, theme } = useStyles();
-  const data = {
-    platform: 'youtube',
-    image: '',
-    name: 'Denis',
-    description: "From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with darker patches. It has red eyes with white pupils, pointed, ear-like structures on top of its head, and a short, blunt snout with a wide mouth. A pair of small, pointed teeth are visible in the upper jaw when its mouth is open. Each of its thick legs ends with three sharp claws. On Bulbasaur's back is a green plant bulb, which is grown from a seed planted there at birth. The",
-    likes: 100,
-    dislikes: 200,
-  };
+
   return (
-    <>
-      <Container m="auto">
-        <div className={classes.inner}>
-          <div className={classes.content}>
-            <Text className={classes.title}>{data.name}</Text>
-            {/* <Box w={300} h={300}> */}
+    <Container m="auto">
+      <div className={classes.inner}>
+        <div className={classes.content}>
+          <Text className={classes.title}>{name}</Text>
+          <Text mt="md">{description}</Text>
+          <Group position="apart" className={classes.footer}>
+            <Center>
+              <Text fz="sm">
+                {`Platform:
+                  ${platform}`}
+              </Text>
+            </Center>
 
-            <Text mt="md">
-              {data.description}
-            </Text>
-            {/* </Box> */}
-
-            <Group position="apart" className={classes.footer}>
+            <Group spacing="lg">
               <Center>
-                {/* <Avatar src={author.image} size={24} radius="xl" mr="xs" /> */}
-                <Text fz="sm" >
-   {               `Platform:
-                  ${data.platform}`}
+                <ActionIcon disabled={disabled} onClick={() => handleUpVoted(_id)} size="lg">
+                  <ThumbUp
+                    color={theme.colors.red[6]}
+                    fill={isUpVoted ? theme.colors.red[6] : 'white'}
+                  />
+                </ActionIcon>
+                <Text size="sm" className={classes.bodyText}>
+                  {votes && votes.upVotes}
                 </Text>
               </Center>
-
-              <Group spacing="lg">
-                <Center>
-                  <ThumbUp size="1rem" color={theme.colors.red[6]} />
-                  <Text size="sm" className={classes.bodyText}>
-                    {data.likes}
-                  </Text>
-                </Center>
-                <Center>
-                  <ThumbDown size="1rem" color={theme.colors.yellow[7]} />
-                  <Text size="sm" className={classes.bodyText}>
-                    {data.dislikes}
-                  </Text>
-                </Center>
-              </Group>
+              <Center>
+                <ActionIcon disabled={disabled} size="lg" onClick={() => handleDownVoted(_id)}>
+                  <ThumbDown
+                    color={theme.colors.red[6]}
+                    fill={isDownVoted ? theme.colors.red[6] : 'white'}
+                  />
+                </ActionIcon>
+                <Text size="sm" className={classes.bodyText}>
+                  {votes && votes.downVotes}
+                </Text>
+              </Center>
             </Group>
-          </div>
-          <Image
-            src={img}
-            alt="steamers image"
-            fit="contain"
-            mx="auto"
-            className={classes.image}
-          />
+          </Group>
         </div>
-      </Container>
-    </>
+        <Image
+          src="/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png"
+          alt="steamers image"
+          fit="contain"
+          mx="auto"
+          className={classes.image}
+        />
+      </div>
+    </Container>
   );
 };
-export { StreamerPage };
-
-
-// ""left" | "right" | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "center" | "end" | "start" | "justify" | "match-parent""
+export { Streamer };

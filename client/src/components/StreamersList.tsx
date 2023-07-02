@@ -13,9 +13,17 @@ import {
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { ThumbUp, ThumbDown } from 'tabler-icons-react';
+import { StreamerRow } from './streamer';
 
 interface UsersTableProps {
-  data: { avatar: string; name: string; job: string; email: string; role: string }[];
+  data: {
+    _id: string;
+    name: string;
+    platform: string;
+    description: string;
+    downVotes: number;
+    upVotes: number;
+  }[];
 }
 
 const useStyles = createStyles((theme) => ({
@@ -55,49 +63,11 @@ const useStyles = createStyles((theme) => ({
 
 const StreamersList = ({ data }: UsersTableProps) => {
   const { classes, cx, theme } = useStyles();
-  const rows = data.map((item) => (
-    <tr key={item.name}>
-      <td>
-        <Text component={Link} to={`streamer/${item.id}`}>
-        <Group spacing="sm">
-          <Avatar size={40} radius={40}>
-            {item.name.slice(0, 2).toLocaleUpperCase()}
-          </Avatar>
-          <div>
-            <Text fz="sm" fw={500}>
-              {item.name}
-            </Text>
-            {/* <Text fz="xs" c="dimmed">
-              {item.email}
-            </Text> */}
-          </div>
-        </Group>
-        </Text>
-      </td>
-
-      <td>{item.platform}</td>
-      <td>
-        <Group>
-          <ThumbUp size="1rem" color={theme.colors.red[6]} />
-          <Text size="sm" className={classes.bodyText}>
-            {item.likes}
-          </Text>
-        </Group>
-      </td>
-      <td>
-        <Group>
-          <ThumbDown size="1rem" color={theme.colors.red[6]} />
-          <Text size="sm" className={classes.bodyText}>
-            {item.dislikes}
-          </Text>
-        </Group>
-      </td>
-    </tr>
-  ));
+  const rows = data.map((item) => <StreamerRow {...item} key={item._id} />);
 
   return (
     <ScrollArea>
-      <Table miw={800} verticalSpacing="sm">
+      <Table maw={1200} verticalSpacing="sm">
         <thead>
           <tr>
             <th>Streamer</th>

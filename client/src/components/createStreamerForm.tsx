@@ -1,7 +1,11 @@
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { Button, Group, TextInput, Box, Select, Textarea } from '@mantine/core';
+import { useState } from 'react';
+import { createStreamer } from '../utils/api';
 
-const AddStreamerForm = () => {
+const AddStreamerForm = ({ setStreamers }: { setStreamers }) => {
+  const [disabled, setDisabled] = useState(false);
+
   const form = useForm({
     initialValues: {
       name: '',
@@ -16,14 +20,13 @@ const AddStreamerForm = () => {
   });
 
   const handleSubmit = async (values) => {
-    const res = await fetch("http://localhost:3000/streamers", {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(values)
-    })
-    form.reset();
+    setDisabled(true);
+    const streamers = await createStreamer(values);
+    if (streamers) {
+      setStreamers(streamers)
+      form.reset();
+    };
+    setDisabled(false);
     // form.getInputProps
   };
 
@@ -32,6 +35,7 @@ const AddStreamerForm = () => {
       component="form"
       maw={400}
       mx="auto"
+      p={15}
       onSubmit={form.onSubmit((values) => handleSubmit(values))}
     >
       <TextInput
@@ -64,7 +68,7 @@ const AddStreamerForm = () => {
         {...form.getInputProps('description')}
       />
       {/* <Group  mt="md"> */}
-      <Button type="submit" fullWidth mt="md">
+      <Button type="submit" fullWidth mt="md" disabled={disabled}>
         Submit
       </Button>
       {/* </Group> */}
