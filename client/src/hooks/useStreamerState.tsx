@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UsersTableProps } from '../components/streamer';
+import { streamerProps } from '../constants/types';
 import { sendVote } from '../utils/api';
 
 const useStreamerState = ({ upVotes, downVotes }: { upVotes: number; downVotes: number }) => {
@@ -8,7 +8,7 @@ const useStreamerState = ({ upVotes, downVotes }: { upVotes: number; downVotes: 
   const [disabled, setDisabled] = useState(false);
   const [votes, setVotes] = useState({ upVotes, downVotes });
 
-  const setVotesFromResult = (result: UsersTableProps) => {
+  const setVotesFromResult = (result: streamerProps) => {
     setVotes({ upVotes: result.upVotes, downVotes: result.downVotes });
   };
 
@@ -18,7 +18,6 @@ const useStreamerState = ({ upVotes, downVotes }: { upVotes: number; downVotes: 
       setDisabled(true);
       const result = await sendVote({ id, upVotesNumber: -1, downVotesNumber: 0 });
       result ? setVotesFromResult(result) : setIsUpVoted(true);
-      console.log(result)
       setDisabled(false);
     } else {
       const downVote = isDownVoted;

@@ -18,6 +18,8 @@ import {
 import { Link } from 'react-router-dom';
 import { useFetch } from '../../../hooks/useFetch';
 import { useStreamerState } from '../../../hooks/useStreamerState';
+import { UI } from '../../../constants/UI';
+import { streamerProps } from '../../../constants/types';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -92,7 +94,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: ) => {
+const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: streamerProps) => {
   // const { id } = useParams();
   const { isUpVoted, isDownVoted, handleUpVoted, handleDownVoted, votes, disabled } =
     useStreamerState({
@@ -110,7 +112,7 @@ const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: ) =>
           <Group position="apart" className={classes.footer}>
             <Center>
               <Text fz="sm">
-                {`Platform:
+                {`${UI.streamers.platform}:
                   ${platform}`}
               </Text>
             </Center>

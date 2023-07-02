@@ -3,6 +3,7 @@ import { Button, Group, TextInput, Box, Select, Textarea } from '@mantine/core';
 import { useState } from 'react';
 import { createStreamer } from '../utils/api';
 import { createStreamerFormValues } from '../constants/types';
+import { UI } from '../constants/UI';
 
 const AddStreamerForm = ({
   setStreamers,
@@ -18,9 +19,9 @@ const AddStreamerForm = ({
       description: '',
     },
     validate: {
-      name: isNotEmpty('Please provide a name of a streamer'),
-      platform: isNotEmpty('Please choose a platform'),
-      description: hasLength({ min: 3 }, 'Please provide description of streamer'),
+      name: isNotEmpty(UI.createStreamerForm.nameError),
+      platform: isNotEmpty(UI.createStreamerForm.platformError),
+      description: hasLength({ min: 3 }, UI.createStreamerForm.descriptionError),
     },
   });
 
@@ -44,14 +45,14 @@ const AddStreamerForm = ({
       onSubmit={form.onSubmit((values) => handleSubmit(values))}
     >
       <TextInput
-        label="Name"
-        placeholder="Streamer's Name"
+        label={UI.createStreamerForm.nameLabel}
+        placeholder={UI.createStreamerForm.namePlaceholder}
         withAsterisk
         {...form.getInputProps('name')}
       />
       <Select
-        label="Select Streamer's platform"
-        placeholder="Platform"
+        label={UI.createStreamerForm.platformLabel}
+        placeholder={UI.createStreamerForm.platformPlaceholder}
         data={[
           { value: 'Twitch', label: 'Twitch' },
           { value: 'Youtube', label: 'Youtube' },
@@ -64,8 +65,8 @@ const AddStreamerForm = ({
         {...form.getInputProps('platform')}
       />
       <Textarea
-        placeholder="Description of a streamer"
-        label="Description"
+        placeholder={UI.createStreamerForm.descriptionPlaceholder}
+        label={UI.createStreamerForm.descriptionLabel}
         withAsterisk
         minRows={3}
         mt="md"

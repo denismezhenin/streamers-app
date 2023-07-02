@@ -1,56 +1,17 @@
-import {
-  Avatar,
-  Badge,
-  Table,
-  Group,
-  Text,
-  Select,
-  ScrollArea,
-  Center,
-  rem,
-  createStyles,
-  Container,
-  ActionIcon,
-} from '@mantine/core';
-import { useState } from 'react';
+import { Avatar, Group, Text, createStyles, ActionIcon } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { ThumbUp, ThumbDown, ColorPickerOff } from 'tabler-icons-react';
+import { ThumbUp, ThumbDown } from 'tabler-icons-react';
 import { useStreamerState } from '../hooks/useStreamerState';
-import { useLocalStorage } from '@mantine/hooks';
 import { streamerProps } from '../constants/types';
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    position: 'relative',
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-  },
-
-  rating: {
-    position: 'absolute',
-    top: theme.spacing.xs,
-    right: rem(12),
-    pointerEvents: 'none',
-  },
-
-  title: {
-    display: 'block',
-    marginTop: theme.spacing.md,
-    marginBottom: rem(5),
-  },
-
-  action: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
-    }),
-  },
-
-  footer: {
-    marginTop: theme.spacing.md,
-  },
   bodyText: {
     color: theme.colors.dark[2],
-    marginLeft: rem(7),
+  },
+  platform: {
+    [theme.fn.smallerThan('sm')]: {
+      display: 'none',
+    },
   },
 }));
 
@@ -71,15 +32,14 @@ const StreamerRow = ({ _id, platform, name, upVotes, downVotes }: streamerProps)
               {name.slice(0, 2).toLocaleUpperCase()}
             </Avatar>
             <div>
-              <Text fz="sm" fw={500}>
+              <Text fz="sm" fw={500} w={{ base: 110, xs: 'auto' }} truncate>
                 {name}
               </Text>
             </div>
           </Group>
         </Text>
       </td>
-
-      <td>{platform}</td>
+      <td className={classes.platform}>{platform}</td>
       <td>
         <Group>
           <ActionIcon disabled={disabled} onClick={() => handleUpVoted(_id)} size="lg">

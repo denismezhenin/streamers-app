@@ -1,65 +1,16 @@
-import {
-  createStyles,
-  Container,
-  Group,
-  ActionIcon,
-  rem,
-  Anchor,
-  Flex,
-  Text,
-  Image,
-} from '@mantine/core';
+import { Container, Group, ActionIcon, Anchor, Flex, Text, Image } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { BrandGithub } from 'tabler-icons-react';
-
-const useStyles = createStyles((theme) => ({
-  footer: {
-    marginTop: rem(50),
-    borderTop: `${rem(1)} solid`,
-    [theme.fn.smallerThan('sm')]: {
-      marginTop: rem(25),
-    },
-  },
-
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
-      paddingTop: theme.spacing.md,
-      paddingBottom: theme.spacing.md,
-    },
-  },
-
-  links: {
-    [theme.fn.smallerThan('sm')]: {
-      marginTop: theme.spacing.md,
-    },
-  },
-  link: {
-    display: 'inline',
-    fontSize: theme.fontSizes.sm,
-    paddingTop: rem(2),
-    paddingBottom: rem(2),
-    whiteSpace: 'nowrap',
-
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-}));
+import { UI } from '../../constants/UI';
+import { footerStyles } from './footerStyles';
 
 const Footer = () => {
-  const { classes } = useStyles();
+  const { classes } = footerStyles();
 
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <ActionIcon component={Link} to="/" className={classes.logo} size={50}>
+        <ActionIcon component={Link} to="/" size={50}>
           <Image src="./icon.svg" alt="Streamers app logo" />
         </ActionIcon>
         <Group spacing={0} className={classes.links} position="right" noWrap>
@@ -71,11 +22,11 @@ const Footer = () => {
           >
             <Flex justify="center" align="center">
               <BrandGithub />
-              <Text align="center">Dzianis Miazhenin</Text>
+              <Text align="center">{UI.footer.name}</Text>
             </Flex>
           </Anchor>
         </Group>
-        <Text>2023</Text>
+        <Text>{UI.footer.year}</Text>
       </Container>
     </div>
   );
