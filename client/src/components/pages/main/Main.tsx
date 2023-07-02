@@ -5,26 +5,17 @@ import { getStreamers } from '../../../utils/api';
 import { useFetch } from '../../../hooks/useFetch';
 import { UsersTableProps } from '../../streamer';
 import { Loader, Center } from '@mantine/core';
+import { AppLoader } from '../../loader';
 
 const MainPage = () => {
-  // const [streamers, setStreamers] = useState([]);
+
   const { data, loading, error, setData } = useFetch('http://localhost:3000/streamers');
-console.log(error)
-  // useEffect(() => {
-  //   const fetchStreamers = async () => {
-  //     const result = await getStreamers();
-  //     result ? setStreamers(result) : null;
-  //   };
-  //   fetchStreamers();
-  // }, []);
+  console.log(error);
+
   return (
     <>
       <AddStreamerForm setStreamers={setData} />
-      {loading && (
-        <Center>
-          <Loader />
-        </Center>
-      )}
+      {loading && <AppLoader />}
       {data && <StreamersList data={data} />}
     </>
   );

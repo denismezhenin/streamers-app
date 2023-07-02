@@ -1,9 +1,8 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Layout } from '../components/layout';
-import { MainPage } from '../components/pages/main/Main';
-import { StreamerPage } from '../components/pages/streamer/StreamerPage';
+import { Routes, Route } from 'react-router-dom';
+import Layout from '../components/layout';
 import { lazy } from 'react';
-
+const MainPage = lazy(() => import('../components/pages/main/Main'));
+const StreamerPage = lazy(() => import('../components/pages/streamer/StreamerPage'));
 
 const Router = () => {
   return (
