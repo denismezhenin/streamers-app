@@ -2,8 +2,13 @@ import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { Button, Group, TextInput, Box, Select, Textarea } from '@mantine/core';
 import { useState } from 'react';
 import { createStreamer } from '../utils/api';
+import { createStreamerFormValues } from '../constants/types';
 
-const AddStreamerForm = ({ setStreamers }: { setStreamers }) => {
+const AddStreamerForm = ({
+  setStreamers,
+}: {
+  setStreamers: React.Dispatch<React.SetStateAction<null>>;
+}) => {
   const [disabled, setDisabled] = useState(false);
 
   const form = useForm({
@@ -19,13 +24,13 @@ const AddStreamerForm = ({ setStreamers }: { setStreamers }) => {
     },
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: createStreamerFormValues) => {
     setDisabled(true);
     const streamers = await createStreamer(values);
     if (streamers) {
-      setStreamers(streamers)
+      setStreamers(streamers);
       form.reset();
-    };
+    }
     setDisabled(false);
     // form.getInputProps
   };

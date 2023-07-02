@@ -6,9 +6,10 @@ import { useFetch } from '../../../hooks/useFetch';
 import { UsersTableProps } from '../../streamer';
 import { Loader, Center } from '@mantine/core';
 import { AppLoader } from '../../loader';
+import {  streamersAPI } from '../../../constants/constants';
 
 const MainPage = () => {
-  const { data, loading, setData } = useFetch('http://localhost:3000/streamers');
+  const { data, loading, setData } = useFetch(streamersAPI);
 
   return (
     <>

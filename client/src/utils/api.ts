@@ -1,9 +1,10 @@
 import { showErrorNotification } from '../components/notifications';
-import { UsersTableProps } from '../components/streamer';
+import { streamersAPI } from '../constants/constants';
+import { createStreamerFormValues, sendVoteValues } from '../constants/types';
 
-const sendVote = async (data) => {
+const sendVote = async (data: sendVoteValues) => {
   try {
-    const res = await fetch(`http://localhost:3000/streamers/${data.id}/vote`, {
+    const res = await fetch(`${streamersAPI}/${data.id}/vote`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -21,9 +22,9 @@ const sendVote = async (data) => {
   }
 };
 
-const createStreamer = async (values) => {
+const createStreamer = async (values: createStreamerFormValues) => {
   try {
-    const res = await fetch('http://localhost:3000/streamers', {
+    const res = await fetch(streamersAPI, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',

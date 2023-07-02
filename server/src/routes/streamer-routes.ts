@@ -8,7 +8,7 @@ streamerRouter.post("/streamers", addStreamer)
 
 streamerRouter.get("/streamers", getAllStreamers)
 
-streamerRouter.get("/streamers/:id",getStreamerByID)
+streamerRouter.get("/streamer/:id",getStreamerByID)
 
 streamerRouter.put("/streamers/:id/vote", updateStreamerVotes)
 

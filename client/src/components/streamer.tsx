@@ -17,15 +17,7 @@ import { Link } from 'react-router-dom';
 import { ThumbUp, ThumbDown, ColorPickerOff } from 'tabler-icons-react';
 import { useStreamerState } from '../hooks/useStreamerState';
 import { useLocalStorage } from '@mantine/hooks';
-
-export interface UsersTableProps {
-  _id: string;
-  name: string;
-  platform: string;
-  description: string;
-  downVotes: number;
-  upVotes: number;
-}
+import { streamerProps } from '../constants/types';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -62,12 +54,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const StreamerRow = ({ _id, platform, name, upVotes, downVotes }: UsersTableProps) => {
-
-  const { isUpVoted, isDownVoted, handleUpVoted, handleDownVoted, votes, disabled } = useStreamerState({
-    upVotes,
-    downVotes,
-  });
+const StreamerRow = ({ _id, platform, name, upVotes, downVotes }: streamerProps) => {
+  const { isUpVoted, isDownVoted, handleUpVoted, handleDownVoted, votes, disabled } =
+    useStreamerState({
+      upVotes,
+      downVotes,
+    });
 
   const { classes, cx, theme } = useStyles();
   return (

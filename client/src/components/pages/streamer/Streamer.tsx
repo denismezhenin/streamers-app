@@ -91,16 +91,8 @@ const useStyles = createStyles((theme) => ({
   // },
 }));
 
-export interface ArticleCardProps {
-  _id: string;
-  name: string;
-  description: string;
-  platform: string;
-  upVotes: number;
-  downVotes: number;
-}
 
-const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: ArticleCardProps) => {
+const Streamer = ({ _id, name, description, platform, upVotes, downVotes }: ) => {
   // const { id } = useParams();
   const { isUpVoted, isDownVoted, handleUpVoted, handleDownVoted, votes, disabled } =
     useStreamerState({

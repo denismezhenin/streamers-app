@@ -14,17 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import { ThumbUp, ThumbDown } from 'tabler-icons-react';
 import { StreamerRow } from './streamer';
-
-interface UsersTableProps {
-  data: {
-    _id: string;
-    name: string;
-    platform: string;
-    description: string;
-    downVotes: number;
-    upVotes: number;
-  }[];
-}
+import { arrStreamerProps } from '../constants/types';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -61,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const StreamersList = ({ data }: UsersTableProps) => {
+const StreamersList = ({ data }: arrStreamerProps) => {
   const { classes, cx, theme } = useStyles();
   const rows = data.map((item) => <StreamerRow {...item} key={item._id} />);
 

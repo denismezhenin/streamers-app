@@ -1,4 +1,14 @@
-import { createStyles, Container, Group, ActionIcon, rem, Anchor, Flex, Text, Image } from '@mantine/core';
+import {
+  createStyles,
+  Container,
+  Group,
+  ActionIcon,
+  rem,
+  Anchor,
+  Flex,
+  Text,
+  Image,
+} from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { BrandGithub } from 'tabler-icons-react';
 
@@ -49,7 +59,7 @@ const Footer = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-      <ActionIcon component={Link} to="/" className={classes.logo} size={50}>
+        <ActionIcon component={Link} to="/" className={classes.logo} size={50}>
           <Image src="./icon.svg" alt="Streamers app logo" />
         </ActionIcon>
         <Group spacing={0} className={classes.links} position="right" noWrap>
