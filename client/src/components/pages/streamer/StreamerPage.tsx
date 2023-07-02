@@ -8,14 +8,11 @@ import { AppLoader } from '../../loader';
 
 const StreamerPage = () => {
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`http://localhost:3000/streamers/${id}`);
-  // console.log(data)
-  console.log(data);
-  console.log(error);
+  const { data, loading } = useFetch(`http://localhost:3000/streamers/${id}`);
   return (
     <>
-      {loading && <AppLoader />}
-      {data && <Streamer {...data} />}
+      {loading ? <AppLoader /> : null}
+      {data ? <Streamer {...data} /> : null}
     </>
   );
 };

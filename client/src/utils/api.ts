@@ -1,3 +1,4 @@
+import { showErrorNotification } from '../components/notifications';
 import { UsersTableProps } from '../components/streamer';
 
 const sendVote = async (data) => {
@@ -9,39 +10,34 @@ const sendVote = async (data) => {
       },
       body: JSON.stringify(data),
     });
-  
+
     if (res.ok) {
       const result = await res.json();
       return result;
     }
-    console.log(res.statusText);
-    return null;
-    // console.log(result);
+    showErrorNotification(res.statusText);
   } catch (err) {
-    console.log(err.message)
-    // return null;
+    if (err instanceof Error) showErrorNotification(err.message);
   }
 };
 
-const createStreamer = async(values) => {
+const createStreamer = async (values) => {
   try {
-    const res = await fetch("http://localhost:3000/streamers", {
+    const res = await fetch('http://localhost:3000/streamers', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-      body: JSON.stringify(values)
-    })
-    const result = await res.json()
-    if (res.status === 201) {
+      body: JSON.stringify(values),
+    });
+    if (res.ok) {
+      const result = await res.json();
       return result;
     }
-    console.log(result)
-    // return result
+    showErrorNotification(res.statusText);
   } catch (err) {
-    console.log(err)
-    return null;
+    if (err instanceof Error) showErrorNotification(err.message);
   }
-} 
+};
 
 export { sendVote, createStreamer };

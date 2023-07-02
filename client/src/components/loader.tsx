@@ -2,7 +2,7 @@ import { Loader, Center } from '@mantine/core';
 
 const AppLoader = () => {
   return (
-    <Center h={100}>
+    <Center maw={400} h="100vh" mx="auto">
       <Loader size="lg" />
     </Center>
   );

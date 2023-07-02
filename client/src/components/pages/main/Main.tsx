@@ -8,15 +8,13 @@ import { Loader, Center } from '@mantine/core';
 import { AppLoader } from '../../loader';
 
 const MainPage = () => {
-
-  const { data, loading, error, setData } = useFetch('http://localhost:3000/streamers');
-  console.log(error);
+  const { data, loading, setData } = useFetch('http://localhost:3000/streamers');
 
   return (
     <>
       <AddStreamerForm setStreamers={setData} />
-      {loading && <AppLoader />}
-      {data && <StreamersList data={data} />}
+      {loading ? <AppLoader /> : null}
+      {data ? <StreamersList data={data} /> : null}
     </>
   );
 };
